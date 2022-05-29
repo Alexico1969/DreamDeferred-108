@@ -167,7 +167,7 @@ class History_page extends StatelessWidget {
             Row( mainAxisAlignment: MainAxisAlignment.spaceEvenly , children: 
               // ignore: prefer_const_literals_to_create_immutables
               [
-                Flexible( child: Text(aboutTxt(), textAlign: TextAlign.center,)),
+                Flexible( child: Text(historyTxt(), textAlign: TextAlign.center,)),
               ],
               
             ),
@@ -219,7 +219,7 @@ class Mission_page extends StatelessWidget {
             Row( mainAxisAlignment: MainAxisAlignment.spaceEvenly , children: 
               // ignore: prefer_const_literals_to_create_immutables
               [
-                Flexible( child: Text(aboutTxt(), textAlign: TextAlign.center,)),
+                Flexible( child: Text(missionTxt(), textAlign: TextAlign.center,)),
               ],
               
             ),
