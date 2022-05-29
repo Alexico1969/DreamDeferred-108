@@ -65,6 +65,7 @@ flutter:
     - assets/img/dd_button_resources.png
     - assets/img/dd_button_stories.png
     - assets/img/dd_button_tech.png
+    - assets/img/dd_button_back.png
     
   # To add assets to your application, add an assets section, like this:
   # assets:
