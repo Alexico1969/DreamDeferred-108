@@ -420,6 +420,7 @@ class Tech_page extends StatelessWidget {
                     onTap: () {
                       getData().then((value) {
                         Text(value);
+                        output_list = value.replaceAll('"', '').split('|');
                         output = value;
                         print('OK, let us try this: $value');
                         Navigator.of(context).push(MaterialPageRoute(
@@ -491,23 +492,16 @@ class Times_page extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 15),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children:
-                  // ignore: prefer_const_literals_to_create_immutables
-                  [
-                Container(
-                  child: Flexible(
-                      child: Text(output.replaceAll('"', ''),
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            backgroundColor: Color.fromARGB(255, 230, 225, 217),
-                          ))),
-                )
-              ],
+            ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemCount: output_list.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(output_list[index]),
+                );
+              },
             ),
-            const SizedBox(height: 15),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
