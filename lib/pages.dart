@@ -662,7 +662,7 @@ class Stories_page extends StatelessWidget {
               children:
                   // ignore: prefer_const_literals_to_create_immutables
                   [
-                const Text('Contact page comes here (under construction)'),
+                const Text('Stories page comes here (under construction)'),
               ],
             ),
             const SizedBox(height: 50),
@@ -703,7 +703,7 @@ class Contact_page extends StatelessWidget {
               children:
                   // ignore: prefer_const_literals_to_create_immutables
                   [
-                const Text('Stories page comes here (under construction)'),
+                const Text('Contact page comes here (under construction)'),
               ],
             ),
             const SizedBox(height: 50),
