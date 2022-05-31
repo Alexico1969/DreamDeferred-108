@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'large_txt.dart';
 import 'api_input.dart';
+import 'variables.dart';
 
 // --------- HOMEPAGE -----------
 
@@ -414,20 +415,99 @@ class Tech_page extends StatelessWidget {
             const SizedBox(height: 15),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                InkWell(
+                    onTap: () {
+                      getData().then((value) {
+                        Text(value);
+                        output = value;
+                        print('OK, let us try this: $value');
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => Times_page()));
+                      });
+                    },
+                    child: Image.asset(
+                      'assets/img/dd_button_times.png',
+                      height: 100,
+                      width: 100,
+                      fit: BoxFit.fitWidth,
+                    )),
+                InkWell(
+                    onTap: () {
+                      print('TODO: Link to external page');
+                    },
+                    child: Image.asset(
+                      'assets/img/dd_button_lms.png',
+                      height: 100,
+                      width: 100,
+                      fit: BoxFit.fitWidth,
+                    )),
+              ],
+            ),
+            const SizedBox(height: 50),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Image.asset(
+                      'assets/img/dd_button_back.png',
+                      height: 100,
+                      width: 100,
+                      fit: BoxFit.fitWidth,
+                    )),
+              ],
+            ),
+          ])),
+    );
+  }
+}
+
+class Times_page extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+          appBar: AppBar(
+            title: Text('Dream Deferred App'),
+            centerTitle: true,
+            backgroundColor: Colors.amber,
+            foregroundColor: Colors.black,
+          ),
+          body: ListView(padding: const EdgeInsets.all(10.0), children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children:
                   // ignore: prefer_const_literals_to_create_immutables
                   [
-                ElevatedButton(
-                  onPressed: () {
-                    getData();
-                  },
-                  child: Text('Click me'),
+                Text(
+                  'LESSON TIME TABLE',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      fontSize: 24, fontWeight: FontWeight.bold),
                 ),
               ],
-
-              //getData();
             ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 15),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children:
+                  // ignore: prefer_const_literals_to_create_immutables
+                  [
+                Container(
+                  child: Flexible(
+                      child: Text(output.replaceAll('"', ''),
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            backgroundColor: Color.fromARGB(255, 230, 225, 217),
+                          ))),
+                )
+              ],
+            ),
+            const SizedBox(height: 15),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

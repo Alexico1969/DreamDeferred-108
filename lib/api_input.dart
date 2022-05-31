@@ -5,15 +5,13 @@ import 'dart:convert';
 import 'dart:io';
 
 Future<String> getData() async {
-  //final url = Uri.parse('https://jsonplaceholder.typicode.com/albums/1');
-  final url = Uri.parse('https://AlexVanWinkel.pythonanywhere.com/test');
+  final url = Uri.parse('https://AlexVanWinkel.pythonanywhere.com/times');
   http.Response response = await http.get(
     url,
     headers: {
       HttpHeaders.authorizationHeader: 'Basic your_api_token_here',
     },
   );
-  print(response.body);
   return response.body;
 }
 
@@ -38,4 +36,14 @@ class TechTimes extends StatelessWidget {
       ))),
     );
   }
+}
+
+class Info {
+  String line1 = "";
+  String line2 = "";
+
+  Info(
+    this.line1,
+    this.line2,
+  );
 }
