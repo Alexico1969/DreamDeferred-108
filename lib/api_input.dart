@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
@@ -12,6 +13,7 @@ Future<String> getData() async {
       HttpHeaders.authorizationHeader: 'Basic your_api_token_here',
     },
   );
+  LoadingIndicatorDialog().dismiss();
   return response.body;
 }
 
@@ -38,12 +40,59 @@ class TechTimes extends StatelessWidget {
   }
 }
 
-class Info {
-  String line1 = "";
-  String line2 = "";
+class LoadingIndicatorDialog {
+  static final LoadingIndicatorDialog _singleton =
+      LoadingIndicatorDialog._internal();
+  late BuildContext _context;
+  bool isDisplayed = false;
 
-  Info(
-    this.line1,
-    this.line2,
-  );
+  factory LoadingIndicatorDialog() {
+    return _singleton;
+  }
+
+  LoadingIndicatorDialog._internal();
+
+  show(BuildContext context, {String text = 'Loading...'}) {
+    if (isDisplayed) {
+      return;
+    }
+    showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          _context = context;
+          isDisplayed = true;
+          return WillPopScope(
+            onWillPop: () async => false,
+            child: SimpleDialog(
+              backgroundColor: Colors.white,
+              children: [
+                Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 16, top: 16, right: 16),
+                        child: CircularProgressIndicator(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Text(text),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+          );
+        });
+  }
+
+  dismiss() {
+    if (isDisplayed) {
+      Navigator.of(_context).pop();
+      isDisplayed = false;
+    }
+  }
 }

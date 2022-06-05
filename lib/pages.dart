@@ -418,6 +418,7 @@ class Tech_page extends StatelessWidget {
               children: [
                 InkWell(
                     onTap: () {
+                      LoadingIndicatorDialog().show(context);
                       getData().then((value) {
                         Text(value);
                         output_list = value.replaceAll('"', '').split('|');
@@ -426,6 +427,8 @@ class Tech_page extends StatelessWidget {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => Times_page()));
                       });
+                      LoadingIndicatorDialog()
+                          .dismiss(); // Not sure if we need this here it's already in getData()
                     },
                     child: Image.asset(
                       'assets/img/dd_button_times.png',

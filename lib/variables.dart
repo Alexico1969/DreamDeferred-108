@@ -1,2 +1,2 @@
-String output = "";
-List output_list = [];
+String output = "Loading...";
+List output_list = ["Loading..."];
