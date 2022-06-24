@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'large_txt.dart';
 import 'api_input.dart';
 import 'variables.dart';
@@ -83,6 +85,20 @@ class DreamDeferredApp extends StatelessWidget {
                     )),
                 InkWell(
                     onTap: () {
+                      getJobs().then((value) {
+                        Text(value);
+                        var tmp_list = value.replaceAll('"', '').split('|');
+                        job_list = [];
+                        for (var i = 0; i < tmp_list.length; i++) {
+                          var tmp = tmp_list[i].split('&');
+                          tmp.add("#");
+                          job_list.add(tmp);
+                        }
+                        var tmp2 = ["*", "*"];
+                        job_list.add(tmp2);
+                        output = value;
+                        print('OK, let us try this: $value');
+                      });
                       Navigator.of(context).push(
                           MaterialPageRoute(builder: (context) => Job_page()));
                     },
@@ -636,10 +652,12 @@ class Job_page extends StatelessWidget {
             ListView.builder(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
-              itemCount: output_list.length,
+              itemCount: job_list.length - 1,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(output_list[index]),
+                  title: Text(job_list[index][0]),
+                  //subtitle: Text(job_list[index][1]),
+                  onTap: () => launch(job_list[index][1]),
                 );
               },
             ),
