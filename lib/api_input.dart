@@ -17,6 +17,18 @@ Future<String> getData() async {
   return response.body;
 }
 
+Future<String> getJobs() async {
+  final url = Uri.parse('https://AlexVanWinkel.pythonanywhere.com/joblist');
+  http.Response response = await http.get(
+    url,
+    headers: {
+      HttpHeaders.authorizationHeader: 'Basic your_api_token_here',
+    },
+  );
+  LoadingIndicatorDialog().dismiss();
+  return response.body;
+}
+
 class TechTimes extends StatelessWidget {
   const TechTimes({Key? key}) : super(key: key);
 

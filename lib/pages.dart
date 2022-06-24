@@ -624,10 +624,25 @@ class Job_page extends StatelessWidget {
               children:
                   // ignore: prefer_const_literals_to_create_immutables
                   [
-                const Text('Job page comes here (under construction)'),
+                Text(
+                  'JOB BOARD',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      fontSize: 24, fontWeight: FontWeight.bold),
+                ),
               ],
             ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 15),
+            ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemCount: output_list.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(output_list[index]),
+                );
+              },
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
